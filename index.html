@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>My Iframe</title>
-	<style>
-			.button {
-			  background-color: #2874f0; /* Green */
-			  border: none;
-			  color: white;
-			  padding: 15px 32px;
-			  text-align: center;
-			  text-decoration: none;
-			  display: inline-block;
-			  font-size: 20px;
-			  margin: 4px 2px;
-			  cursor: pointer;
-			}
-			</style>
-</head>
-<body>
+  <head>
+    <title>My Iframe</title>
+    <style>
+		.tnc {
+			font-size: 24px;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+      .button {
+        background-color: #2874f0; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 2px;
+        cursor: pointer;
+		margin: auto;
+    	display: block;
+      }
+    </style>
+  </head>
+  <body>
+	<div class="tnc"> TnC to come here.</div>  
+    <button type="button" class="button">
+      Agree & Continue
+    </button>
 
-<button type="button" style="height: 50px; width: 250px" class="button">Agree & Continue</button>
-
-<script type="text/javascript">
-	var target_origin = 'https://mohitjaindev.github.io';
-	var message = {
-		type: "tnc_accepted",
-		data: "TnC Accepted"
-	}
-	document.querySelector('button').onclick = function () {
-		parent.postMessage(message, "*")
-	};
-</script>
-
-
-</body>
+    <script type="text/javascript">
+      var target_origin = "https://mohitjaindev.github.io";
+      var message = {
+        type: "tnc_accepted",
+        data: "TnC Accepted"
+      };
+      document.querySelector("button").onclick = function() {
+        parent.postMessage(message, "*");
+      };
+    </script>
+  </body>
 </html>
