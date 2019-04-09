@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Index</title>
+	<title>My Iframe</title>
+	<style>
+			.button {
+			  background-color: #2874f0; /* Green */
+			  border: none;
+			  color: white;
+			  padding: 15px 32px;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  font-size: 20px;
+			  margin: 4px 2px;
+			  cursor: pointer;
+			}
+			</style>
 </head>
 <body>
 
-<iframe src="iframe.html" width="600" height="600"></iframe>
+<button type="button" style="height: 50px; width: 250px" class="button">Agree & Continue</button>
 
 <script type="text/javascript">
-	let eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
-	let eventer = window[eventMethod];
-	let messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
-	eventer(messageEvent, function (e) {
-		let origin = (e.originalEvent && e.originalEvent.origin) || e.origin;
-		if(origin !== 'http://my.flipkart.com:8080' || e.data.type !== "tnc_accepted")
-		return;
-
-		console.log("Message from flipkart- ", e.data.data);
-	});
+	var target_origin = 'http://my.flipkart.com:8080';
+	var message = {
+		type: "tnc_accepted",
+		data: "TnC Accepted"
+	}
+	document.querySelector('button').onclick = function () {
+		parent.postMessage(message, target_origin)
+	};
 </script>
+
 </body>
 </html>
