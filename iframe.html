@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<iframe src="iframe.html" width="600" height="600"></iframe>
+<iframe src="https://preprod.flipkart.com/rv/client-tnc?stoken_type=Bearer&token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfa2V5IjoiTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUF3d09xRHFkbXk2cVh3OWd6YWIxYzJuNEkzQVBML1h5NUJydE1DNndlWWNmdEM3T25kQmtxbGIyYjV0TWtSLzRsVXIxYlUza0pUMlhzMStDSlhnelIzMS9RaExka01OQVNzakhqaEc3SXE4d3U1QzlaNG5VL09HK3dNMWcvaE8zZy9OaGF1RVJZSzg0ZE9zaUhJWXZhTGVacG5lU0IxYUF6SFNhZk1zU09JM3RydWthYnNYaGptNExoWEFnRlFZZnlhcldDWGJYUXhzQUJkdHFkdExjK3NhMHRWV0t3aS9jckczOTl3TWcxNmk3ZmgzWHFrMXJnZmxPaDcyWnhFbHVmVFV4T2lOZ1NpZW4ydVdRVHFRbmwxQ1AzaEtxZko2dDRsc3k5S2N5b2U2d0ZkR3ZZSDh6YXUvN1MyY2hPYVRIeWh2K1VEWW13Z2JlZEVBOVB6VGpPMVFJREFRQUIiLCJpc3N1ZWRfYXQiOjE1NTYyNzMyODh9.NkgRscuD0Wo2d9_M19ypjk3W25cIVCu8LhfrUd10c8xX9zkGiUncn7LpQrq3b-rA22WJnSe0MqFRBf_oZVUIhV_HXrxkkA3wGoRkXZQioeKKa7JzR22_RAxQrwWBJuXYkvXO802bx2qRYY0h6ceidDeWuvzcQ9pE9xxuNqyaWtduwnArGCu0nuYuKk4OjShkQIvEGhfCW829aPEvp04SYfOxGCzzOrp2F8WDM6YZI_pVt5orCptHIxuo3WwgV3MVBLqyVwFxsLFFmf6DX-Y6YLhXlH7AzUPHLPo_BxW1JmXbpHx6Of8sgoRZmvmsmy6WfO0k_bR0CTmTWKYorVtN7g&tncKey=bnpl-externalization&origin=https://myntra.com" width="100%" height="600" id="myIFrame"></iframe>
 
 <script type="text/javascript">
 	let eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
@@ -13,10 +13,21 @@
 	let messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
 	eventer(messageEvent, function (e) {
 		let origin = (e.originalEvent && e.originalEvent.origin) || e.origin;
-		if(origin !== 'http://my.flipkart.com:8080' || e.data.type !== "tnc_accepted")
+		console.log("origin", origin);
+		console.log("e.data.type", e.data.type);
+		if(origin !== 'http://my.flipkart.com:3000' || e.data.type !== "iframeLoaded")
 		return;
-
-		console.log("Message from flipkart- ", e.data.data);
+		const message = {
+			type: 'styleUpdate',
+			style: {
+				submitBtnBgColor: '#ff3e6c',
+				submitBtnTextColor: '#fff',
+				headerBgColor: '#ff3e6c',
+				headerTextColor: '#fff'
+			}
+		}
+		window.document.getElementById("myIFrame").contentWindow.postMessage(message,"*");
+		// console.log("Message from flipkart- ", e.data.data);
 	});
 </script>
 </body>
